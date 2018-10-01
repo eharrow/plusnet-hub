@@ -4,8 +4,8 @@
 # "forked" from https://www.gebbl.net/2017/01/the-plusnet-hub-one-and-webscraping-for-fun-and-profit/
 
 routerip="192.168.1.254"
-pass='<password>'
-page=$(curl -L "http://$routerip/index.cgi?active_page=9148" -H 'Cookie: rg_cookie_session_id=' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Cache-Control: max-age=0' -H 'DNT: 1' --data 'active_page=9121' --cookie-jar cookies.txt)
+pass="<PASSWORD>"
+page=$(curl -Ls "http://$routerip/index.cgi?active_page=9148" -H 'Cookie: rg_cookie_session_id=' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Cache-Control: max-age=0' -H 'DNT: 1' --data 'active_page=9121' --cookie-jar cookies.txt)
 posttoken=$(echo $page |grep post_token |awk 'BEGIN { FS = "\"post_token\" value=\"" } ; {print $2}'|awk 'BEGIN { FS = "\"" } ; {print $1}'|xargs)
 requestid=$(echo $page |grep request_id |awk 'BEGIN { FS = "\"request_id\" value=\"" } ; {print $2}'|awk 'BEGIN { FS = "\"" } ; {print $1}'|xargs)
 authkey=$(echo $page |grep auth_key |awk 'BEGIN { FS = "\"auth_key\" value=\"" } ; {print $2}'|awk 'BEGIN { FS = "\"" } ; {print $1}'|xargs)
