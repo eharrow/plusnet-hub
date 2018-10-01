@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# screen scrapes the Plusnet Hub's admin screens to get the current external IP address
+# "forked" from https://www.gebbl.net/2017/01/the-plusnet-hub-one-and-webscraping-for-fun-and-profit/
+
 routerip="192.168.1.254"
 pass='<password>'
 page=$(curl -L "http://$routerip/index.cgi?active_page=9148" -H 'Cookie: rg_cookie_session_id=' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Cache-Control: max-age=0' -H 'DNT: 1' --data 'active_page=9121' --cookie-jar cookies.txt)
